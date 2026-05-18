@@ -1,0 +1,94 @@
+Family Dataset — Target: grandfather(X,Y)
+------------------------------------------
+Persons (24): Christopher, Penelope, Arthur, Victoria, Andrew, Christine, James, Jennifer ...
+
+father facts : 12
+mother facts : 12
+
+Positive grandfather examples : 8
+Negative examples             : 568
+(Closed-world assumption: unlisted pairs are negative)
+
+Positive examples:
+  grandfather(Andrew, Charlotte)
+  grandfather(Andrew, Colin)
+  grandfather(Christopher, Charlotte)
+  grandfather(Christopher, Colin)
+  grandfather(Pierro, Alfonso)
+  grandfather(Pierro, Sophia)
+  grandfather(Roberto, Alfonso)
+  grandfather(Roberto, Sophia)
+
+FOIL Learning — Target: grandfather(X,Y)
+Positive examples : 8
+Negative examples : 568
+
+=== Learning Rule 1 ===
+Start: grandfather(X,Y) :- true.
+
+  Coverage: p0=8, n0=568
+  Evaluating candidate literals:
+    father(X,Z)           p1= 8, n1=136, gain=16.0000
+    father(Z,Y)           p1= 8, n1=280, gain=8.0000
+    mother(Z,Y)           p1= 8, n1=280, gain=8.0000
+    father(X,Y)           p1= 0, n1=12, gain=-inf
+    mother(X,Z)           p1= 0, n1=144, gain=-inf
+    mother(X,Y)           p1= 0, n1=12, gain=-inf
+
+  >> Selected: father(X,Z)  (gain=16.0000)
+  Updated rule : grandfather(X,Y) :- father(X,Z).
+  Coverage now : p1=8, n1=136
+
+  Coverage: p0=8, n0=136
+  Evaluating candidate literals:
+    father(Z,Y)           p1= 4, n1= 0, gain=16.6797
+    mother(Z,Y)           p1= 4, n1= 0, gain=16.6797
+    father(X,Y)           p1= 0, n1=12, gain=-inf
+    mother(X,Z)           p1= 0, n1= 0, gain=-inf
+    mother(X,Y)           p1= 0, n1= 0, gain=-inf
+
+  >> Selected: father(Z,Y)  (gain=16.6797)
+  Updated rule : grandfather(X,Y) :- father(X,Z), father(Z,Y).
+  Coverage now : p1=4, n1=0
+
+  No negatives covered — rule is pure. Done.
+Learned Rule 1: grandfather(X,Y) :- father(X,Z), father(Z,Y).
+  Covered 4 positives | Remaining: 4
+
+=== Learning Rule 2 ===
+Start: grandfather(X,Y) :- true.
+
+  Coverage: p0=4, n0=568
+  Evaluating candidate literals:
+    father(X,Z)           p1= 4, n1=136, gain=8.1224
+    father(Z,Y)           p1= 4, n1=280, gain=4.0405
+    mother(Z,Y)           p1= 4, n1=280, gain=4.0405
+    father(X,Y)           p1= 0, n1=12, gain=-inf
+    mother(X,Z)           p1= 0, n1=144, gain=-inf
+    mother(X,Y)           p1= 0, n1=12, gain=-inf
+
+  >> Selected: father(X,Z)  (gain=8.1224)
+  Updated rule : grandfather(X,Y) :- father(X,Z).
+  Coverage now : p1=4, n1=136
+
+  Coverage: p0=4, n0=136
+  Evaluating candidate literals:
+    father(Z,Y)           p1= 0, n1= 0, gain=-inf
+    mother(Z,Y)           p1= 4, n1= 0, gain=20.5171
+    father(X,Y)           p1= 0, n1=12, gain=-inf
+    mother(X,Z)           p1= 0, n1= 0, gain=-inf
+    mother(X,Y)           p1= 0, n1= 0, gain=-inf
+
+  >> Selected: mother(Z,Y)  (gain=20.5171)
+  Updated rule : grandfather(X,Y) :- father(X,Z), mother(Z,Y).
+  Coverage now : p1=4, n1=0
+
+  No negatives covered — rule is pure. Done.
+Learned Rule 2: grandfather(X,Y) :- father(X,Z), mother(Z,Y).
+  Covered 4 positives | Remaining: 0
+
+========================================
+Final Learned Rules:
+  grandfather(X,Y) :- father(X,Z), father(Z,Y).
+  grandfather(X,Y) :- father(X,Z), mother(Z,Y).
+FOIL Finished.

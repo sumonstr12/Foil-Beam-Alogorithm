@@ -1,0 +1,75 @@
+Family Dataset — Target: grandfather(X,Y)
+------------------------------------------
+Persons (24): Christopher, Penelope, Arthur, Victoria, Andrew, Christine, James, Jennifer ...
+
+father facts : 12
+mother facts : 12
+
+Positive grandfather examples : 8
+Negative examples             : 568
+(Closed-world assumption: unlisted pairs are negative)
+
+Positive examples:
+  grandfather(Andrew, Charlotte)
+  grandfather(Andrew, Colin)
+  grandfather(Christopher, Charlotte)
+  grandfather(Christopher, Colin)
+  grandfather(Pierro, Alfonso)
+  grandfather(Pierro, Sophia)
+  grandfather(Roberto, Alfonso)
+  grandfather(Roberto, Sophia)
+
+Beam Search — Target: grandfather(X,Y)
+Beam width=3, Max depth=4
+
+=== Searching Rule 1 ===
+Depth 1: 6 candidates
+  Top 3 rules:
+  1. grandfather(X,Y) :- father(X,Z).  acc=0.056, cov=1.000, p=8, n=136
+  2. grandfather(X,Y) :- father(Z,Y).  acc=0.028, cov=1.000, p=8, n=280
+  3. grandfather(X,Y) :- mother(Z,Y).  acc=0.028, cov=1.000, p=8, n=280
+
+Depth 2: 15 candidates
+  Top 3 rules:
+  1. grandfather(X,Y) :- father(X,Z), father(Z,Y).  acc=1.000, cov=0.500, p=4, n=0
+  2. grandfather(X,Y) :- father(X,Z), mother(Z,Y).  acc=1.000, cov=0.500, p=4, n=0
+  3. grandfather(X,Y) :- father(Z,Y), father(X,Z).  acc=1.000, cov=0.500, p=4, n=0
+
+Depth 3: 12 candidates
+  Top 3 rules:
+  1. grandfather(X,Y) :- father(X,Z), father(Z,Y), mother(Z,Y).  acc=0.000, cov=0.000, p=0, n=0
+  2. grandfather(X,Y) :- father(X,Z), father(Z,Y), father(X,Y).  acc=0.000, cov=0.000, p=0, n=0
+  3. grandfather(X,Y) :- father(X,Z), father(Z,Y), mother(X,Z).  acc=0.000, cov=0.000, p=0, n=0
+
+Depth 4: 9 candidates
+  Top 3 rules:
+  1. grandfather(X,Y) :- father(X,Z), father(Z,Y), mother(Z,Y), father(X,Y).  acc=0.000, cov=0.000, p=0, n=0
+  2. grandfather(X,Y) :- father(X,Z), father(Z,Y), mother(Z,Y), mother(X,Z).  acc=0.000, cov=0.000, p=0, n=0
+  3. grandfather(X,Y) :- father(X,Z), father(Z,Y), mother(Z,Y), mother(X,Y).  acc=0.000, cov=0.000, p=0, n=0
+
+Selected Rule 1: grandfather(X,Y) :- father(X,Z), father(Z,Y).
+  acc=1.000, cov=0.500, p=4, n=0
+  Remaining positives: 4
+
+=== Searching Rule 2 ===
+Depth 1: 6 candidates
+  Top 3 rules:
+  1. grandfather(X,Y) :- father(X,Z).  acc=0.029, cov=1.000, p=4, n=136
+  2. grandfather(X,Y) :- father(Z,Y).  acc=0.014, cov=1.000, p=4, n=280
+  3. grandfather(X,Y) :- mother(Z,Y).  acc=0.014, cov=1.000, p=4, n=280
+
+Depth 2: 15 candidates
+  Top 3 rules:
+  1. grandfather(X,Y) :- father(X,Z), mother(Z,Y).  acc=1.000, cov=1.000, p=4, n=0
+  2. grandfather(X,Y) :- mother(Z,Y), father(X,Z).  acc=1.000, cov=1.000, p=4, n=0
+  3. grandfather(X,Y) :- father(X,Z), father(Z,Y).  acc=0.000, cov=0.000, p=0, n=0
+
+Selected Rule 2: grandfather(X,Y) :- father(X,Z), mother(Z,Y).
+  acc=1.000, cov=1.000, p=4, n=0
+  Remaining positives: 0
+
+========================================
+Final Rules:
+  grandfather(X,Y) :- father(X,Z), father(Z,Y).
+  grandfather(X,Y) :- father(X,Z), mother(Z,Y).
+Beam Search Finished.

@@ -444,6 +444,63 @@ This shows that ILP can automatically discover meaningful relational rules from 
 
 ---
 
+## 18. How to Run
+ 
+### Folder Structure
+ 
+All files should be in the **same folder**:
+ 
+```text
+files/
+|-- family_dataset.py
+|-- family_loader.py
+|-- family_foil.py
+|-- family_beam_search.py
+|-- main_family.py
+```
+ 
+### Requirements
+ 
+Python 3 must be installed. No extra libraries needed — only built-in modules are used.
+ 
+```bash
+python3 --version
+```
+ 
+### Run the Project
+ 
+```bash
+cd files
+python3 main_family.py
+```
+ 
+### Expected Output
+ 
+After running, an `output/` folder will be created inside `files/`:
+ 
+```text
+files/
+`-- output/
+    |-- family_foil_output.txt
+    `-- family_beam_output.txt
+```
+ 
+The terminal will also print the full FOIL and Beam Search results.
+ 
+### Run Individual Algorithms
+ 
+To run only FOIL:
+ 
+```bash
+python3 family_foil.py
+```
+ 
+To run only Beam Search:
+ 
+```bash
+python3 family_beam_search.py
+```
+
 ## 18. References
 
 - Class lecture slide: Learning First Order Logic / Learning Rules
